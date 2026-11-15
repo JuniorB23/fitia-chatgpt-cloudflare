@@ -62,6 +62,7 @@ async function sendDay(database, date) {
 
 async function putSummary(database, summary) {
   if (!database) throw serviceError("La base D1 no está configurada.", 503);
+  await ensureSchema(database);
   await database
     .prepare(
       `INSERT INTO daily_summaries (date, payload, updated_at)
@@ -76,11 +77,24 @@ async function putSummary(database, summary) {
 
 async function getSummary(database, date) {
   if (!database) throw serviceError("La base D1 no está configurada.", 503);
+  await ensureSchema(database);
   const row = await database
     .prepare("SELECT payload FROM daily_summaries WHERE date = ?1 LIMIT 1")
     .bind(date)
     .first();
   return row?.payload ? JSON.parse(row.payload) : null;
+}
+
+async function ensureSchema(database) {
+  await database
+    .prepare(
+      `CREATE TABLE IF NOT EXISTS daily_summaries (
+         date TEXT PRIMARY KEY NOT NULL,
+         payload TEXT NOT NULL,
+         updated_at TEXT NOT NULL
+       )`,
+    )
+    .run();
 }
 
 function authorized(request, env) {
