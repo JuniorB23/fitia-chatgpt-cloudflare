@@ -1,0 +1,5 @@
+# El despliegue de Cloudflare solicitará este secreto.
+# Usa un valor aleatorio de al menos 32 caracteres y copia el mismo valor
+# en la app Android y en la autenticación de la GPT Action.
+BRIDGE_API_KEY=REEMPLAZAR_CON_TOKEN_ALEATORIO_LARGO
+
