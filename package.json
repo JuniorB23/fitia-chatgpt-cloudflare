@@ -1,0 +1,28 @@
+{
+  "name": "fitia-chatgpt-cloudflare",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "dev": "wrangler dev",
+    "db:migrate": "wrangler d1 migrations apply DB --remote",
+    "deploy": "npm run db:migrate && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "cloudflare": {
+    "label": "Fitia → ChatGPT",
+    "products": ["Workers", "D1"],
+    "bindings": {
+      "DB": {
+        "description": "Base D1 privada que conserva los resúmenes diarios de calorías y macronutrientes."
+      },
+      "BRIDGE_API_KEY": {
+        "description": "Token aleatorio privado de al menos 32 caracteres. Debe ser el mismo en la app Android y en la GPT Action."
+      }
+    }
+  }
+}
+
