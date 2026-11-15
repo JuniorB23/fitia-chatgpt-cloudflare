@@ -3,6 +3,7 @@
   "name": "fitia-chatgpt-cloudflare",
   "main": "src/worker.mjs",
   "compatibility_date": "2026-11-15",
+  "workers_dev": true,
   "vars": {
     "TIMEZONE": "America/Asuncion"
   },
