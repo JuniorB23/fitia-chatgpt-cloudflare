@@ -125,6 +125,12 @@ class FakeD1 {
   prepare(sql) {
     const database = this;
     return {
+      async run() {
+        if (!sql.includes("CREATE TABLE IF NOT EXISTS daily_summaries")) {
+          throw new Error("SQL inesperado");
+        }
+        return { success: true };
+      },
       bind(...values) {
         return {
           async run() {
