@@ -11,6 +11,7 @@
     {
       "binding": "DB",
       "database_name": "fitia-chatgpt-data",
+      "database_id": "02c5522f-6457-40d1-bf71-af3751ed5f89",
       "migrations_dir": "migrations"
     }
   ]
